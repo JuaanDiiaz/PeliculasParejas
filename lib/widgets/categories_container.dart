@@ -9,26 +9,18 @@ class CategoriesContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final genresList = Provider.of<MoviesProvider>(context).genresList;
-    final size = MediaQuery.of(context).size;
 
-    return Container(
-      width: double.infinity,
-      height: size.height * 0.8,
-      child: Expanded(
-        child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: genresList.length,
-          itemBuilder: (BuildContext context, int index) {
-            final genre = genresList[index];
-            Provider.of<MoviesProvider>(context).getMoviesByGenre(genre.id);
-            final movies =
-                Provider.of<MoviesProvider>(context).genreMovies[genre.id] ??
-                    [];
-            return MovieSlider(
-                movies: movies, title: genre.name, onNextPage: () => {});
-          },
-        ),
-      ),
+    return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      itemCount: genresList.length,
+      itemBuilder: (BuildContext context, int index) {
+        final genre = genresList[index];
+        Provider.of<MoviesProvider>(context).getMoviesByGenre(genre.id);
+        final movies = Provider.of<MoviesProvider>(context).genreMovies[genre.id] ?? [];
+        return MovieSlider(movies: movies, title: genre.name, onNextPage: () => {});
+      },
     );
   }
 }

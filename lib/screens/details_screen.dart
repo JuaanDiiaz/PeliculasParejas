@@ -11,14 +11,7 @@ class DetailsScreen extends StatelessWidget {
         body: CustomScrollView(
       slivers: [
         _CustomAppBar(movie),
-        SliverList(
-            delegate: SliverChildListDelegate([
-          _PosterAndTitle(movie),
-          _Overview(movie),
-          _Overview(movie),
-          _Overview(movie),
-          CastingCards(movie.id)
-        ]))
+        SliverList(delegate: SliverChildListDelegate([_PosterAndTitle(movie), _Overview(movie), CastingCards(movie.id)]))
       ],
     ));
   }
@@ -92,20 +85,10 @@ class _PosterAndTitle extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(movie.title,
-                    style: textTheme.headlineSmall,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2),
-                Text(movie.originalTitle,
-                    style: textTheme.titleMedium,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2),
+                Text(movie.title, style: textTheme.headlineSmall, overflow: TextOverflow.ellipsis, maxLines: 2),
+                Text(movie.originalTitle, style: textTheme.titleMedium, overflow: TextOverflow.ellipsis, maxLines: 2),
                 Row(
-                  children: [
-                    Icon(Icons.star_outline, size: 15, color: Colors.grey),
-                    SizedBox(width: 5),
-                    Text('${movie.voteAverage}', style: textTheme.bodySmall)
-                  ],
+                  children: [Icon(Icons.star_outline, size: 15, color: Colors.grey), SizedBox(width: 5), Text('${movie.voteAverage}', style: textTheme.bodySmall)],
                 )
               ],
             ),
